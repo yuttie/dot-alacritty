@@ -8,8 +8,8 @@
 #
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
-#import:
-#  - /path/to/alacritty.yml
+import:
+  - ~/.config/alacritty/colors/spacegray-dark.yml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -181,12 +181,12 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: false
 
-# Colors
-colors:
+# Colors (Tomorrow Night)
+#colors:
   # Default colors
-  primary:
-    background: '#e8e9ec'
-    foreground: '#33374c'
+  #primary:
+  #  background: '#1d1f21'
+  #  foreground: '#c5c8c6'
 
     # Bright and dim foreground colors
     #
@@ -273,26 +273,26 @@ colors:
   #  background: CellForeground
 
   # Normal colors
-  normal:
-    black:   '#dcdfe7'
-    red:     '#cc517a'
-    green:   '#668e3d'
-    yellow:  '#c57339'
-    blue:    '#2d539e'
-    magenta: '#7759b4'
-    cyan:    '#3f83a6'
-    white:   '#33374c'
+  #normal:
+  #  black:   '#1d1f21'
+  #  red:     '#cc6666'
+  #  green:   '#b5bd68'
+  #  yellow:  '#f0c674'
+  #  blue:    '#81a2be'
+  #  magenta: '#b294bb'
+  #  cyan:    '#8abeb7'
+  #  white:   '#c5c8c6'
 
   # Bright colors
-  bright:
-    black:   '#8389a3'
-    red:     '#cc3768'
-    green:   '#598030'
-    yellow:  '#b6662d'
-    blue:    '#22478e'
-    magenta: '#6845ad'
-    cyan:    '#327698'
-    white:   '#262a3f'
+  #bright:
+  #  black:   '#666666'
+  #  red:     '#d54e53'
+  #  green:   '#b9ca4a'
+  #  yellow:  '#e7c547'
+  #  blue:    '#7aa6da'
+  #  magenta: '#c397d8'
+  #  cyan:    '#70c0b1'
+  #  white:   '#eaeaea'
 
   # Dim colors
   #
