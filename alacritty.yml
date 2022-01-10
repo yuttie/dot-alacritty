@@ -63,6 +63,12 @@
   #     - buttonless: Title bar, transparent background and no title bar buttons
   #decorations: full
 
+  # Background opacity
+  #
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  #opacity: 1.0
+
   # Startup Mode (changes require restart)
   #
   # Values for `startup_mode`:
@@ -114,7 +120,7 @@ font:
     family: monospace
 
     # The `style` can be specified to pick a specific face.
-    style: Semibold
+    style: Medium
 
   # Bold font face
   bold:
@@ -125,7 +131,7 @@ font:
     #family: monospace
 
     # The `style` can be specified to pick a specific face.
-    style: Heavy
+    style: Bold
 
   # Italic font face
   italic:
@@ -136,7 +142,7 @@ font:
     #family: monospace
 
     # The `style` can be specified to pick a specific face.
-    style: Semibold Italic
+    style: Medium Oblique
 
   # Bold italic font face
   bold_italic:
@@ -147,10 +153,10 @@ font:
     #family: monospace
 
     # The `style` can be specified to pick a specific face.
-    style: Heavy Italic
+    style: Bold Oblique
 
   # Point size
-  size: 9.0
+  size: 10.0
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -230,7 +236,7 @@ colors:
 
   # Keyboard regex hints
   #hints:
-    # Fist character in the hint label
+    # First character in the hint label
     #
     # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
@@ -293,14 +299,14 @@ colors:
   # If the dim colors are not set, they will be calculated automatically based
   # on the `normal` colors.
   #dim:
-  #  black:   '#000000'
-  #  red:     '#8c3336'
-  #  green:   '#7a8530'
-  #  yellow:  '#97822e'
-  #  blue:    '#506d8f'
-  #  magenta: '#80638e'
-  #  cyan:    '#497e7a'
-  #  white:   '#9a9a9a'
+  #  black:   '#131415'
+  #  red:     '#864343'
+  #  green:   '#777c44'
+  #  yellow:  '#9e824c'
+  #  blue:    '#556a7d'
+  #  magenta: '#75617b'
+  #  cyan:    '#5b7d78'
+  #  white:   '#828482'
 
   # Indexed Colors
   #
@@ -311,6 +317,13 @@ colors:
   #   `- { index: 16, color: '#ff00ff' }`
   #
   #indexed_colors: []
+
+  # Transparent cell backgrounds
+  #
+  # Whether or not `window.opacity` applies to all cell backgrounds or only to
+  # the default background. When set to `true` all cells will be transparent
+  # regardless of their background color.
+  #transparent_background_colors: false
 
 # Bell
 #
@@ -353,12 +366,6 @@ colors:
   #
   #command: None
 
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-#background_opacity: 1.0
-
 #selection:
   # This string contains all characters that are used as separators for
   # "semantic words" in Alacritty.
@@ -376,7 +383,7 @@ cursor:
     #   - ▇ Block
     #   - _ Underline
     #   - | Beam
-    shape: Block
+    #shape: Block
 
     # Cursor blinking state
     #
@@ -385,7 +392,7 @@ cursor:
     #   - Off: Disable blinking by default
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
-    blinking: On
+    blinking: Always
 
   # Vi mode cursor style
   #
@@ -396,7 +403,7 @@ cursor:
   #vi_mode_style: None
 
   # Cursor blinking interval in milliseconds.
-  #blink_interval: 750
+  blink_interval: 500
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -433,6 +440,9 @@ cursor:
 # Send ESC (\x1b) before characters when alt is pressed.
 #alt_send_esc: true
 
+# Offer IPC using `alacritty msg` (unix only)
+#ipc_socket: true
+
 #mouse:
   # Click settings
   #
@@ -458,8 +468,8 @@ cursor:
   # Each hint must have a `regex` and either an `action` or a `command` field.
   # The fields `mouse`, `binding` and `post_processing` are optional.
   #
-  # The fields `command`, `binding.key`, `binding.mods` and `mouse.mods` accept
-  # the same values as they do in the `key_bindings` section.
+  # The fields `command`, `binding.key`, `binding.mods`, `binding.mode` and
+  # `mouse.mods` accept the same values as they do in the `key_bindings` section.
   #
   # The `mouse.enabled` field controls if the hint should be underlined while
   # the mouse with all `mouse.mods` keys held or the vi mode cursor is above it.
@@ -478,7 +488,7 @@ cursor:
   #   - MoveViModeCursor
   #       Move the vi mode cursor to the beginning of the hint.
   #enabled:
-  # - regex: "(mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+  # - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
   #           [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
   #   command: xdg-open
   #   post_processing: true
@@ -507,13 +517,19 @@ cursor:
 #   - Right
 #   - Numeric identifier such as `5`
 #
-# - `action` (see key bindings)
+# - `action` (see key bindings for actions not exclusive to mouse mode)
+#
+# - Mouse exclusive actions:
+#
+#   - ExpandSelection
+#       Expand the selection to the current mouse cursor location.
 #
 # And optionally:
 #
 # - `mods` (see key bindings)
 #mouse_bindings:
-#  - { mouse: Middle, action: PasteSelection }
+#  - { mouse: Right,             action: ExpandSelection }
+#  - { mouse: Middle, mode: ~Vi, action: PasteSelection  }
 
 # Key bindings
 #
@@ -582,6 +598,8 @@ cursor:
 #   - ToggleFullscreen
 #   - SpawnNewInstance
 #       Spawn a new instance of Alacritty.
+#   - CreateNewWindow
+#       Create a new Alacritty window from the current process.
 #   - ClearLogNotice
 #       Clear Alacritty's UI warning and error notice.
 #   - ClearSelection
@@ -730,11 +748,11 @@ key_bindings:
   #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
 
   # Vi Mode
-  #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
   #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
+  #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
   #- { key: Escape,                      mode: Vi|~Search, action: ClearSelection          }
-  #- { key: I,                           mode: Vi|~Search, action: ScrollToBottom          }
   #- { key: I,                           mode: Vi|~Search, action: ToggleViMode            }
+  #- { key: I,                           mode: Vi|~Search, action: ScrollToBottom          }
   #- { key: C,      mods: Control,       mode: Vi|~Search, action: ToggleViMode            }
   #- { key: Y,      mods: Control,       mode: Vi|~Search, action: ScrollLineUp            }
   #- { key: E,      mods: Control,       mode: Vi|~Search, action: ScrollLineDown          }
